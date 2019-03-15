@@ -1,0 +1,131 @@
+Input positive integer binary raw 64bit bigInt long long pib64                                                    
+                                                                                                                  
+Python C structures fill a SAS void..                                                                             
+It looks like Python maps the C structures.                                                                       
+                                                                                                                  
+https://github.com/rogerjdeangelis/utl-input-positive-integer-binary-raw-64bit-bigInt-long-long-pib64             
+                                                                                                                  
+github                                                                                                            
+http://tinyurl.com/y6sfxjol                                                                                       
+https://docs.python.org/3/library/struct.html                                                                     
+                                                                                                                  
+Note 128bit floats could represent all the types and more (like packed decimal).                                  
+                                                                                                                  
+x      pad byte             no value                                                                              
+c      char                 bytes oflength 1                                                                      
+b      signed char          integer        1                                                                      
+B      unsigned char        integer        1                                                                      
+?      _Bool                 bool          1                                                                      
+h      short                integer        2                                                                      
+H      unsigned short       integer        2                                                                      
+i      int                  integer        4                                                                      
+I      unsigned int         integer        4                                                                      
+l      long                 integer        4                                                                      
+L      unsigned long        integer        4                                                                      
+q      long long            integer        8                                                                      
+Q      unsigned long long   integer        8                                                                      
+n      ssize_t              integer                                                                               
+N      size_t               integer                                                                               
+e      (7)                  float          2                                                                      
+f      float                float          4                                                                      
+d      double               float          8                                                                      
+s      char[]               bytes                                                                                 
+p      char[]               bytes                                                                                 
+P      void *               integer                                                                               
+                                                                                                                  
+*_                   _                                                                                            
+(_)_ __  _ __  _   _| |_                                                                                          
+| | '_ \| '_ \| | | | __|                                                                                         
+| | | | | |_) | |_| | |_                                                                                          
+|_|_| |_| .__/ \__,_|\__|                                                                                         
+        |_|                                                                                                       
+;                                                                                                                 
+                                                                                                                  
+* create 3 64bit positive integer binary;                                                                         
+                                                                                                                  
+%utl_submit_py64('                                                                                                
+import struct;                                                                                                    
+byto=(struct.pack("3Q",3031323334453637381,3031323334453637381,3031323334453637381));                             
+with open("d:/bin/posbin.bin", "wb") as w:;                                                                       
+.    w.write(byto);                                                                                               
+');                                                                                                               
+                                                                                                                  
+Three 8 byte positive integer binary raw                                                                          
+                                                                                                                  
+d:/bin/posbin.bin                                                                                                 
+                                                                                                                  
+1   CHAR  .1v.ƒl.*    ** this is 3031323334453637381 in binary format;                                            
+    ZONE  03718612                                                                                                
+    NUMR  51653C1A                                                                                                
+                                                                                                                  
+2   CHAR  .1v.ƒl.*                                                                                                
+    ZONE  03718612                                                                                                
+    NUMR  51653C1A                                                                                                
+                                                                                                                  
+3   CHAR  .1v.ƒl.*                                                                                                
+    ZONE  03718612                                                                                                
+    NUMR  51653C1A                                                                                                
+                                                                                                                  
+                                                                                                                  
+12345678 12345678 12345678                                                                                        
+1vƒl* 1vƒl* 1vƒl*                                                                                        
+                                                                                                                  
+*            _               _                                                                                    
+  ___  _   _| |_ _ __  _   _| |_                                                                                  
+ / _ \| | | | __| '_ \| | | | __|                                                                                 
+| (_) | |_| | |_| |_) | |_| | |_                                                                                  
+ \___/ \__,_|\__| .__/ \__,_|\__|                                                                                 
+                |_|                                                                                               
+;                                                                                                                 
+                                                                                                                  
+WORL.WANT total obs=3                                                                                             
+                                                                                                                  
+Obs            PIB                                                                                                
+                                                                                                                  
+ 1     3031323334453637381                                                                                        
+ 2     3031323334453637381                                                                                        
+ 3     3031323334453637381                                                                                        
+                                                                                                                  
+*          _       _   _                                                                                          
+ ___  ___ | |_   _| |_(_) ___  _ __                                                                               
+/ __|/ _ \| | | | | __| |/ _ \| '_ \                                                                              
+\__ \ (_) | | |_| | |_| | (_) | | | |                                                                             
+|___/\___/|_|\__,_|\__|_|\___/|_| |_|                                                                             
+                                                                                                                  
+;                                                                                                                 
+* convert the binary bigInt to ascii numbers;                                                                     
+                                                                                                                  
+%utl_submit_py64("                                                                                                
+import struct;                                                                                                    
+data = open('d:/bin/posbin.bin', 'rb').read();                                                                    
+res=struct.unpack('3Q', data);                                                                                    
+print(res);                                                                                                       
+f = open('d:/txt/posTxt.txt','w');                                                                                
+print >>f,res;                                                                                                    
+");                                                                                                               
+                                                                                                                  
+/*                                                                                                                
+ d:/txt/posTxt.txt                                                                                                
+                                                                                                                  
+ (3031323334453637381L, 3031323334453637381L, 3031323334453637381L)                                               
+*/                                                                                                                
+                                                                                                                  
+data want;                                                                                                        
+  infile "d:/txt/posTxt.txt";                                                                                     
+  input;                                                                                                          
+  _infile_=compress(_infile_,'()L ');                                                                             
+  do i=1 to 3;                                                                                                    
+    pib=scan(_infile_,i);                                                                                         
+    output;                                                                                                       
+  end;                                                                                                            
+  drop i;                                                                                                         
+run;quit;                                                                                                         
+                                                                                                                  
+WORL.WANT total obs=3                                                                                             
+                                                                                                                  
+Obs            PIB                                                                                                
+                                                                                                                  
+ 1     3031323334453637381                                                                                        
+ 2     3031323334453637381                                                                                        
+ 3     3031323334453637381                                                                                        
+                                                                                                                  
